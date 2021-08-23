@@ -6,12 +6,9 @@ import withSession from '@/lib/session';
 
 export default withSession(async (req, res) => {
   const { name, email, password } = await req.body;
-  console.log('no pasa 1');
   try {
     if (req.method === 'POST') {
-      console.log('no pasa 2');
       await dbConnect();
-      console.log('no pasa');
       // create user
       const hashPassword = await bcrypt.hash(password, 10);
       const user = await new User({
@@ -19,7 +16,6 @@ export default withSession(async (req, res) => {
         email,
         password: hashPassword,
       });
-      console.log('pasa');
       await user.save();
       req.session.set('user', user);
       await req.session.save();
