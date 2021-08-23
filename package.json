@@ -9,13 +9,18 @@
     "@fortawesome/fontawesome-free": "5.15.4",
     "@popperjs/core": "2.9.3",
     "@tailwindcss/forms": "0.3.3",
+    "bcryptjs": "^2.4.3",
     "chart.js": "3.5.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
+    "http-status": "^1.5.0",
+    "mongoose": "^5.13.7",
     "next": "11.1.0",
+    "next-iron-session": "^4.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3",
+    "swr": "^0.5.6",
     "tailwindcss": "2.2.7"
   },
   "scripts": {
