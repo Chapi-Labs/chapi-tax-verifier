@@ -9,7 +9,7 @@ import fetchJson from '@/lib/fetchJson';
 export default function Login() {
 
   const { mutateUser } = useUser({
-    redirectTo: '/profile-sg',
+    redirectTo: '/',
     redirectIfFound: true,
   });
 

@@ -17,7 +17,7 @@ export default withSession(async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     // if the password is a match
     if (valid === true) {
-      req.session.set('user', user);
+      req.session.set('user', { id: user._id, email: user.email });
       await req.session.save();
       return res.json(user);
     } else {
