@@ -2,11 +2,12 @@ import withSession from '@/lib/session';
 import User from '@/models/user.model';
 import bcrypt from 'bcryptjs';
 import httpStatus from 'http-status';
+import dbConnect from '@/lib/dbConnect';
 
 export default withSession(async (req, res) => {
   const { email, password } = await req.body;
-
   try {
+    await dbConnect();
     // get user from db
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
@@ -25,6 +26,7 @@ export default withSession(async (req, res) => {
       return res.status(httpStatus.UNAUTHORIZED).end();
     }
   } catch (error) {
+    console.log(error);
     const { response: fetchResponse } = error;
     res.status(fetchResponse?.status || 500).json(error.data);
   }

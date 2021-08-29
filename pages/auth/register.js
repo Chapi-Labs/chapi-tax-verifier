@@ -12,7 +12,6 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
     const email = emailInput.current.value;
     const password = passwordInput.current.value;
 
@@ -21,7 +20,6 @@ export default function Register() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    console.log(response);
     if (response.ok) {
       return router.push('/index');
     }
