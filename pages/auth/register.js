@@ -20,9 +20,7 @@ export default function Register() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, name }),
       });
-      if (response.ok) {
-        return router.push('/index');
-      }
+      return router.push('/index');
     } catch (error) {
       setErrorMsg(error.data.message);
     }
