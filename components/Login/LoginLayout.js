@@ -22,19 +22,18 @@ export default function Login({ children }) {
               </div>
               <div className="flex flex-wrap mt-6 relative">
                 <div className="w-1/2">
-                  <a
-                    href="#pablo"
+                  <button
                     onClick={(e) => e.preventDefault()}
                     className="text-blueGray-200"
                   >
                     <small>Forgot password?</small>
-                  </a>
+                  </button>
                 </div>
                 <div className="w-1/2 text-right">
                   <Link href="/auth/register">
-                    <a href="#pablo" className="text-blueGray-200">
+                    <button className="text-blueGray-200">
                       <small>Create new account</small>
-                    </a>
+                    </button>
                   </Link>
                 </div>
               </div>

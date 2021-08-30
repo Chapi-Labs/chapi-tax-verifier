@@ -12,7 +12,7 @@ export default withSession(async (req, res) => {
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       // password not valid
-      return res.status(httpStatus.UNAUTHORIZED).end();
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'User does not exist'});
     }
     // compare hashed password
     const valid = await bcrypt.compare(password, user.password);
@@ -23,7 +23,7 @@ export default withSession(async (req, res) => {
       return res.json(user);
     } else {
       // password not valid
-      return res.status(httpStatus.UNAUTHORIZED).end();
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Invalid Password'});
     }
   } catch (error) {
     console.log(error);
