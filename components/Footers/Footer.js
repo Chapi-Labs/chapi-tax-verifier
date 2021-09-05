@@ -144,10 +144,10 @@ export default function Footer() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-blueGray-500 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} Notus NextJS by{' '}
+                Copyright © {new Date().getFullYear()}
                 <a
                   href="https://chapilabs.com"
-                  className="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
+                  className="text-blueGray-600 hover:text-blueGray-300 text-sm font-semibold py-1"
                 >
                   Chapi Labs
                 </a>
