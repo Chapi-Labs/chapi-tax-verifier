@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import httpStatus from 'http-status';
-import APIError from '@/lib/APIError';
+import APIError from '../lib/APIError';
 
 /**
- * User Schema
+ * Provider Schema
  */
-const UserSchema = new mongoose.Schema({
+const ProviderSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     lowercase: false,
     trim: true,
   },
-  email: {
+  nit: {
     type: String,
     required: true,
     unique: true,
@@ -22,12 +22,6 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  resetPasswordToken: {
-    type: String
-  },
-  resetPasswordExpiration: {
-    type: Date
   },
   updatedAt: {
     type: Date,
@@ -54,14 +48,14 @@ UserSchema.method({});
 /**
  * Statics
  */
-UserSchema.statics = {
+ProviderSchema.statics = {
   /**
    * Get user
-   * @param {string} id - The email of user.
+   * @param {ObjectId} id - The objectId of user.
    * @returns {Promise<User, APIError>}
    */
-  get(email) {
-    return this.findOne({ email })
+  get(id) {
+    return this.findById(id)
       .select(
         'name email'
       )
@@ -96,6 +90,6 @@ UserSchema.statics = {
 };
 
 /**
- * @typedef User
+ * @typedef Provider
  */
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export default mongoose.models.Provider || mongoose.model('Provider', ProviderSchema);

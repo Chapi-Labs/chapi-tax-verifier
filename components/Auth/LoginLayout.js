@@ -1,7 +1,7 @@
 import Auth from 'layouts/Auth';
 import Link from 'next/link';
 
-export default function Login({ children }) {
+export default function Login({ title, children }) {
   return (
     <>
       <Auth>
@@ -12,7 +12,7 @@ export default function Login({ children }) {
                 <div className="rounded-t mb-0 px-6 py-6">
                   <div className="text-center mb-3">
                     <h6 className="text-blueGray-500 text-sm font-bold">
-                      Sign with credentials
+                      {title}
                     </h6>
                   </div>
                 </div>
@@ -22,17 +22,16 @@ export default function Login({ children }) {
               </div>
               <div className="flex flex-wrap mt-6 relative">
                 <div className="w-1/2">
-                  <button
-                    onClick={(e) => e.preventDefault()}
-                    className="text-blueGray-200"
-                  >
-                    <small>Forgot password?</small>
-                  </button>
+                  <Link href="/auth/forgot">
+                    <button className="text-blueGray-200">
+                      <small>Olvidé la contraseña?</small>
+                    </button>
+                  </Link>
                 </div>
                 <div className="w-1/2 text-right">
                   <Link href="/auth/register">
                     <button className="text-blueGray-200">
-                      <small>Create new account</small>
+                      <small>Crear nueva cuenta</small>
                     </button>
                   </Link>
                 </div>
