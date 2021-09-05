@@ -72,7 +72,7 @@ const UserDropdown = () => {
           }
         >
           {' '}
-          {user.email}
+          {user && user.email}
         </button>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <button
