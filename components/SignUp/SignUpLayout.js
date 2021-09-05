@@ -1,5 +1,5 @@
+import Link from "next/link";
 // layout for page
-
 import Auth from 'layouts/Auth.js';
 
 export default function SignUp({ children }) {
@@ -12,13 +12,22 @@ export default function SignUp({ children }) {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-500 text-sm font-bold">
-                    Sign up
+                    Registrarse
                   </h6>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 {children}
+              </div>
+            </div>
+            <div className="flex flex-wrap mt-6 relative">
+              <div className="w-1/2">
+                <Link href="/auth/login">
+                  <button className="text-blueGray-200">
+                    <small>Iniciar Sesión</small>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

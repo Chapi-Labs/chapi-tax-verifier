@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Form from '@/components/Auth/ResetForm';
-import LoginLayout from '@/components/Auth/LoginLayout';
+import DefaultLayout from '@/components/Auth/DefaultLayout';
 import fetchJson from '@/lib/fetchJson';
 import absoluteUrl from 'next-absolute-url';
 
@@ -28,7 +28,7 @@ export default function Reset({ token, email }) {
     setLoading(false);
   };
   return (
-    <LoginLayout>
+    <DefaultLayout>
       <Form
         isLogin
         errorMessage={errorMsg}
@@ -36,7 +36,7 @@ export default function Reset({ token, email }) {
         loading={loading}
         email={email}
       ></Form>
-    </LoginLayout>
+    </DefaultLayout>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Form from '@/components/Auth/ForgotForm';
-import LoginLayout from '@/components/Auth/LoginLayout';
+import DefaultLayout from '@/components/Auth/DefaultLayout';
 import fetchJson from '@/lib/fetchJson';
 
 export default function Forgot() {
@@ -31,14 +31,14 @@ export default function Forgot() {
   }
   return (
     <>
-      <LoginLayout title="Recuperar Contraseña">
+      <DefaultLayout title="Recuperar Contraseña">
         <Form
           isLogin
           errorMessage={errorMsg}
           onSubmit={handleSubmit}
           disabled={loading}
         ></Form>
-      </LoginLayout>
+      </DefaultLayout>
     </>
   );
 }
