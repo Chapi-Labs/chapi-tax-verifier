@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../lib/APIError';
+import mongoose from 'mongoose'
+import httpStatus from 'http-status'
+import APIError from '../lib/APIError'
 
 /**
  * Provider Schema
@@ -19,10 +19,16 @@ const ProviderSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
+  taxes: [{
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+    status: {
+      type: String,
+      required: true
+    }
+  }],
   updatedAt: {
     type: Date,
     default: Date.now,
@@ -31,7 +37,7 @@ const ProviderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
 /**
  * Add your
@@ -43,53 +49,47 @@ const ProviderSchema = new mongoose.Schema({
 /**
  * Methods
  */
-UserSchema.method({});
+ ProviderSchema.method({})
 
 /**
  * Statics
  */
 ProviderSchema.statics = {
   /**
-   * Get user
+   * Get provider
    * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * @returns {Promise<Provider, APIError>}
    */
   get(id) {
-    return this.findById(id)
-      .select(
-        'name email'
-      )
+    return this.findByNit(nit)
+      .select('name nit taxes')
       .exec()
-      .then((user) => {
-        if (user) {
-          return user;
+      .then((provider) => {
+        if (provider) {
+          return provider
         }
-        const err = new APIError(
-          'User id does not exist',
-          httpStatus.NOT_FOUND
-        );
-        return Promise.reject(err);
-      });
+        const err = new APIError('Provider nit does not exist', httpStatus.NOT_FOUND)
+        return Promise.reject(err)
+      })
   },
   /**
    * List users in descending order of 'createdAt' timestamp.
    * @param {number} skip - Number of users to be skipped.
    * @param {number} limipt - Limit number of users to be returned.
-   * @returns {Promise<User[]>}
+   * @returns {Promise<Provider[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
-      .select(
-        'name email createdAt updatedAt '
-      )
+      .select('name nit taxes createdAt updatedAt ')
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
-      .exec();
+      .exec()
   },
-};
+}
 
 /**
  * @typedef Provider
  */
-export default mongoose.models.Provider || mongoose.model('Provider', ProviderSchema);
+export default mongoose.models.Provider ||
+  mongoose.model('Provider', ProviderSchema)

@@ -21,7 +21,7 @@ export default function Reset({ token, email }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, email, password }),
       });
-      return router.push('/auth/login');
+      return router.push('/');
     } catch (error) {
       setErrorMsg(error.data.message);
     }
