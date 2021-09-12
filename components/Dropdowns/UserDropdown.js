@@ -27,7 +27,7 @@ const UserDropdown = () => {
 
     try {
       mutateUser(
-        await fetchJson('/api/logout', {
+        await fetchJson('/api/auth/logout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         })
