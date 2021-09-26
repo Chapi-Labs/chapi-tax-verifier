@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 // components
 
-import CardPageVisits from 'components/Cards/CardPageVisits.js';
-import CardSocialTraffic from 'components/Cards/CardSocialTraffic.js';
+import CardPageVisits from "components/Cards/CardPageVisits.js";
+import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
 
 // layout for page
-import Admin from 'layouts/Admin.js';
+import Admin from "layouts/Admin.js";
 
 import withSession from "@/lib/session";
 
@@ -26,17 +26,16 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
-  const user = req.session.get('user');
+  const user = req.session.get("user");
   if (!user) {
     return {
       redirect: {
-        destination: '/auth/login',
-        permanent: false
-      }
-    }
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
   }
   return {
-    props: {}
-  }
+    props: {},
+  };
 });
-

@@ -9,9 +9,11 @@
     "@tailwindcss/forms": "0.3.3",
     "bcryptjs": "^2.4.3",
     "chart.js": "3.5.0",
+    "cors": "^2.8.5",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
     "http-status": "^1.5.0",
+    "match-sorter": "^6.3.1",
     "mongoose": "^5.13.7",
     "next": "11.1.0",
     "next-absolute-url": "^1.2.2",
@@ -21,8 +23,8 @@
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3",
     "react-spinners": "^0.11.0",
-    "swr": "^0.5.6",
-    "tailwindcss": "2.2.7"
+    "react-table": "^7.7.0",
+    "swr": "^0.5.6"
   },
   "scripts": {
     "start": "next start",
@@ -50,12 +52,13 @@
     "typescript": "4.3.5"
   },
   "devDependencies": {
-    "autoprefixer": "10.3.1",
+    "autoprefixer": "^10.3.6",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "lint-staged": "^11.1.2",
-    "postcss": "8.3.6"
+    "postcss": "^8.3.8",
+    "tailwindcss": "^2.2.16"
   }
 }

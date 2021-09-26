@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '@/lib/APIError';
+import mongoose from "mongoose";
+import httpStatus from "http-status";
+import APIError from "@/lib/APIError";
 
 /**
  * User Schema
@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    lowercase: true,
     unique: true,
     trim: true,
   },
@@ -24,10 +25,19 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   resetPasswordToken: {
-    type: String
+    type: String,
   },
   resetPasswordExpiration: {
-    type: Date
+    type: Date,
+  },
+  role: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
+  organization: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organization",
   },
   updatedAt: {
     type: Date,
@@ -62,16 +72,14 @@ UserSchema.statics = {
    */
   get(email) {
     return this.findOne({ email })
-      .select(
-        'name email'
-      )
+      .select("name email")
       .exec()
       .then((user) => {
         if (user) {
           return user;
         }
         const err = new APIError(
-          'User id does not exist',
+          "User id does not exist",
           httpStatus.NOT_FOUND
         );
         return Promise.reject(err);
@@ -83,11 +91,10 @@ UserSchema.statics = {
    * @param {number} limipt - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
-      .select(
-        'name email createdAt updatedAt '
-      )
+  list({ skip = 0, limit = 50, organization } = {}) {
+    return this.find({ "organization.id": organization })
+      .select("name email createdAt updatedAt ")
+      .populate("organization")
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
@@ -98,4 +105,4 @@ UserSchema.statics = {
 /**
  * @typedef User
  */
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export default mongoose.models.User || mongoose.model("User", UserSchema);
