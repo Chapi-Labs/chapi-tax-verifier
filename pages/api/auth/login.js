@@ -1,4 +1,5 @@
 import withSession from "@/lib/session";
+import Organization from "@/models/organization.model";
 import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
 import httpStatus from "http-status";
@@ -9,7 +10,10 @@ export default withSession(async (req, res) => {
   try {
     await dbConnect();
     // get user from db
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: email.toLowerCase() }).populate(
+      "organization"
+    );
+    console.log(user);
     if (!user) {
       // password not valid
       return res
@@ -24,7 +28,10 @@ export default withSession(async (req, res) => {
         id: user._id,
         email: user.email,
         role: user.role,
-        organization: user.organization,
+        organization: {
+          id: user.organization._id,
+          name: user.organization.name,
+        },
       });
       await req.session.save();
       return res.json(user);

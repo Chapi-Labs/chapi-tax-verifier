@@ -6,8 +6,15 @@ import CardTable from "components/Cards/CardTable.js";
 import withSession from "@/lib/session";
 // layout for page
 import Admin from "layouts/Admin.js";
+import { useRouter } from "next/router";
 
 export default function Providers({ data }) {
+  const router = useRouter();
+
+  function onNew() {
+    router.push("/admin/providers/new");
+  }
+
   const columns = useMemo(
     () => [
       {
@@ -26,7 +33,12 @@ export default function Providers({ data }) {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
-          <CardTable title="Proveedores" columns={columns} data={data} />
+          <CardTable
+            title="Proveedores"
+            columns={columns}
+            data={data}
+            onNewClick={onNew}
+          />
         </div>
         <div className="w-full mb-12 px-4"></div>
       </div>

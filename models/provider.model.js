@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
-import httpStatus from 'http-status'
-import APIError from '../lib/APIError'
+import mongoose from "mongoose";
+import httpStatus from "http-status";
+import APIError from "../lib/APIError";
 
 /**
  * Provider Schema
@@ -16,7 +16,7 @@ const ProviderSchema = new mongoose.Schema({
   nit: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     trim: true,
   },
   taxes: [
@@ -33,7 +33,7 @@ const ProviderSchema = new mongoose.Schema({
   ],
   organization: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Organization',
+    ref: "Organization",
   },
   updatedAt: {
     type: Date,
@@ -43,7 +43,7 @@ const ProviderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-})
+});
 
 /**
  * Add your
@@ -55,7 +55,7 @@ const ProviderSchema = new mongoose.Schema({
 /**
  * Methods
  */
-ProviderSchema.method({})
+ProviderSchema.method({});
 
 /**
  * Statics
@@ -68,38 +68,39 @@ ProviderSchema.statics = {
    */
   get(id) {
     return this.findByNit(nit)
-      .select('name nit taxes')
+      .select("name nit taxes")
       .exec()
       .then((provider) => {
         if (provider) {
-          return provider
+          return provider;
         }
         const err = new APIError(
-          'Provider nit does not exist',
-          httpStatus.NOT_FOUND,
-        )
-        return Promise.reject(err)
-      })
+          "Provider nit does not exist",
+          httpStatus.NOT_FOUND
+        );
+        return Promise.reject(err);
+      });
   },
   /**
    * List providers by organization
    * @param {number} skip - Number of users to be skipped.
-   * @param {number} limipt - Limit number of users to be returned.
+   * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<Provider[]>}
    */
   list({ skip = 0, limit = 50, organization } = {}) {
-    return this.find({ 'organization.id': organization})
-      .select('name nit taxes createdAt updatedAt ')
-      .populate('organization')
+    return this.find({
+      organization: mongoose.Types.ObjectId(organization),
+    })
+      .select("name nit taxes createdAt ")
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
-      .exec()
+      .exec();
   },
-}
+};
 
 /**
  * @typedef Provider
  */
 export default mongoose.models.Provider ||
-  mongoose.model('Provider', ProviderSchema)
+  mongoose.model("Provider", ProviderSchema);

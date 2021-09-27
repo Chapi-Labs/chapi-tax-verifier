@@ -33,7 +33,10 @@ export default withSession(async (req, res) => {
         id: user._id,
         email: user.email,
         role: user.role,
-        organization: user.organization,
+        organization: {
+          id: organizationSaved._id,
+          name: organizationSaved.name,
+        },
       });
       await req.session.save();
       return res.status(httpStatus.OK).json({ success: true });

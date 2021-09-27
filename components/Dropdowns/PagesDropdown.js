@@ -63,7 +63,7 @@ const PagesDropdown = () => {
             Settings
           </a>
         </Link>
-        <Link href="/admin/providers">
+        <Link href="/admin/providers/list">
           <a
             href="#pablo"
             className={

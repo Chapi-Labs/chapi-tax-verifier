@@ -138,12 +138,12 @@ export default function Sidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/admin/providers">
+                <Link href="/admin/providers/list">
                   <a
-                    href="#pablo"
+                    href="#"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/providers") !== -1
+                      (router.pathname.indexOf("/admin/providers/list") !== -1
                         ? "text-slu-500 hover:text-slu-600"
                         : "text-blueGray-700 hover:text-blueGray-500")
                     }
@@ -151,7 +151,7 @@ export default function Sidebar() {
                     <i
                       className={
                         "fas fa-table mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/providers") !== -1
+                        (router.pathname.indexOf("/admin/providers/list") !== -1
                           ? "opacity-75"
                           : "text-blueGray-300")
                       }

@@ -38,7 +38,7 @@ function GlobalFilter({
             onChange(e.target.value);
           }}
           placeholder={`${count} buscar...`}
-          className="px-3 py-3 m-5 placeholder-blueGray-300 text-blueGray-600 relative bg-whiterounded text-sm  outline-none focus:outline-none w-full pl-10"
+          className="border-0 px-3 py-3 m-1 placeholder-blueGray-300 text-blueGray-600 relative bg-whiterounded text-sm  outline-none focus:outline-none w-full pl-10"
         />
       </div>
     </form>
@@ -68,7 +68,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-export default function CardTable({ color, title, columns, data }) {
+export default function CardTable({ color, title, columns, data, onNewClick }) {
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -117,10 +117,7 @@ export default function CardTable({ color, title, columns, data }) {
               {title}
             </h3>
           </div>
-          <button
-            className="bg-blueGray-800 active:bg-blueGray-600 text-white font-bold uppercase text-xs px-4 py-2 my-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-            type="button"
-          >
+          <button className="button" type="button" onClick={onNewClick}>
             Crear Nuevo
           </button>
         </div>

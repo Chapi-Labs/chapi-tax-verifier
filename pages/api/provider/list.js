@@ -7,8 +7,9 @@ export default withSession(async (req, res) => {
   try {
     await dbConnect();
     const user = req.session.get("user");
-    console.log(user.organization);
-    const providers = await Provider.list(user.organization);
+    const providers = await Provider.list({
+      organization: user.organization.id,
+    });
     console.log(providers);
     return res.json({ providers });
   } catch (error) {
