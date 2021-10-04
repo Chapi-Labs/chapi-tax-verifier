@@ -10,7 +10,6 @@ export default withSession(async (req, res) => {
     const providers = await Provider.list({
       organization: user.organization.id,
     });
-    console.log(providers);
     return res.json({ providers });
   } catch (error) {
     console.log(error);

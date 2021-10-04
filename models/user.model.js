@@ -92,7 +92,7 @@ UserSchema.statics = {
    * @returns {Promise<User[]>}
    */
   list({ skip = 0, limit = 50, organization } = {}) {
-    return this.find({ "organization.id": organization })
+    return this.find({ organization: organization })
       .select("name email createdAt updatedAt ")
       .populate("organization")
       .sort({ createdAt: -1 })

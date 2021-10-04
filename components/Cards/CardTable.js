@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime";
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import {
   useTable,
@@ -68,15 +68,22 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-export default function CardTable({ color, title, columns, data, onNewClick }) {
-  const defaultColumn = React.useMemo(
+export default function CardTable({
+  color,
+  title,
+  columns,
+  data,
+  onNewClick,
+  getActions,
+}) {
+  const defaultColumn = useMemo(
     () => ({
       // Let's set up our default Filter UI
       Filter: DefaultColumnFilter,
     }),
     []
   );
-  const filterTypes = React.useMemo(
+  const filterTypes = useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
       fuzzyText: fuzzyTextFilterFn,
@@ -138,7 +145,7 @@ export default function CardTable({ color, title, columns, data, onNewClick }) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps(column.getSortByToggleProps())}
-                      className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                      className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-100"
                     >
                       {column.render("Header")}
                       {/* Add a sort direction indicator */}
@@ -155,6 +162,11 @@ export default function CardTable({ color, title, columns, data, onNewClick }) {
                       </span>
                     </th>
                   ))}
+                  {getActions && (
+                    <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-100">
+                      Acciones
+                    </th>
+                  )}
                 </tr>
               ))}
             </thead>
@@ -184,6 +196,11 @@ export default function CardTable({ color, title, columns, data, onNewClick }) {
                           );
                         })
                       }
+                      {getActions && (
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {getActions(row.original)}
+                        </td>
+                      )}
                     </tr>
                   );
                 })

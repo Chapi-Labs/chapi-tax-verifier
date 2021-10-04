@@ -8,7 +8,6 @@
     "@popperjs/core": "2.9.3",
     "@tailwindcss/forms": "0.3.3",
     "bcryptjs": "^2.4.3",
-    "chart.js": "3.5.0",
     "cors": "^2.8.5",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
@@ -54,6 +53,7 @@
     "typescript": "4.3.5"
   },
   "devDependencies": {
+    "@types/react-table": "^7.7.5",
     "autoprefixer": "^10.3.6",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.25.1",
